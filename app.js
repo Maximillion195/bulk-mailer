@@ -34,8 +34,6 @@ let config = require('./config/config.json');
 
 // Creates an object of bottleneck with the required settings - Infinite requests, one request ever 1.2 seconds, ??, ??, ??
 let limiter = new Bottleneck(0, 100, -1, Bottleneck.strategy.BLOCK, true);
-let outputArray = [];
-
 let today = moment().format("DD-MM-YYYY");
 
 
@@ -57,7 +55,6 @@ readData(csvName).then((data) => {
 		}).then((res) => {
 
 			logger.verbose(res);
-			outputArray.push(["Sent", res.successUser])
 
 			// Log to DB
 			db.get('sentEmails')
@@ -71,8 +68,6 @@ readData(csvName).then((data) => {
 
 			} else if (err.hasOwnProperty("failedUser")) { // Handle failed sending
 				logger.error(err);
-
-				outputArray.push(["Failed", err.failedUser, err.reason]);
 
 				db.get('failedEmails')
 				  .push({ id: uniqueId, user: err.failedUser, date: today, reason: err.reason})
@@ -100,7 +95,7 @@ function readData(file) {
 		  	resolve(allData);
 		  }) 
 		  .on('error', () => {
-		  	reject("got damn");
+		  	reject("Failed reading the CSV");
 		  })
 	})
 }
@@ -181,14 +176,3 @@ function send(transporter, mailOptions) {
 
 	})
 }
-
-limiter.on('idle', function () {
-		// This will be called when the nbQueued() drops to 0 AND there is nothing currently running in the limiter. 
-		logger.silly("Bottleneck idle");
-		
-		if(outputArray.length > 0) {
-			let currentDT = new Date().toISOString().replace('T', ' ').replace(/\..*$/, '').replace(/:/g,'.');
-			fastcsv.writeToStream(fs.createWriteStream(`output/${ currentDT }.csv`), outputArray, {headers: false});
-		}
-
-})
