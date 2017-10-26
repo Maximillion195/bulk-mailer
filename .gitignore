@@ -1,0 +1,8 @@
+# Mac stuff
+.DS_Store
+
+node_modules/
+
+logs/production.log
+output/
+db/

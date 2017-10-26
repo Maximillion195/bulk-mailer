@@ -1,68 +1,95 @@
-const Bottleneck = require("bottleneck");
-const nodemailer = require('nodemailer');
-const logger = require('./utils/logger');
-//const fs = require('fs')
-const fs = require('fs-extra');
-const csv = require('csv-parser');
-const fastcsv = require('fast-csv');
-const axios = require('axios');
+const Bottleneck = require("bottleneck"),
+	nodemailer = require('nodemailer'),
+	logger = require('./utils/logger'),
+	fs = require('fs-extra'),
+	csv = require('csv-parser'),
+	fastcsv = require('fast-csv'),
+	axios = require('axios'),
+	moment = require('moment');
 
-//Config File
-var config = require('./config/config.json');
-
-// Creates an object of bottleneck with the required settings - Infinite requests, one request ever 1.2 seconds, ??, ??, ??
-var limiter = new Bottleneck(0, 100, -1, Bottleneck.strategy.BLOCK, true);
-var outputArray = [];
+let csvName, dbName;
 
 if(process.env.GOLIVE == 1) {
-
-	readData('data/test.csv').then((data) => {
-
-		for (let userData of data) {
-
-			prepareMail(userData, config.sender, config.subject, config.options).then((res) => {
-
-				// Bottleneck to limit the sending
-				return limiter.schedule(send, res.transporter, res.mailOptions);
-
-			}).then((res) => {
-
-				logger.verbose(res);
-				outputArray.push(["Sent", res.successUser])
-
-			}).catch((err) => {
-				
-				logger.error(err);
-
-				if(err.hasOwnProperty("failedUser")) {
-					outputArray.push(["Failed", err.failedUser, err.reason]);
-				}
-			});
-		}
-	}).catch((err) => {
-        logger.error(err);
-    })
+	csvName = "./data/prod.csv"
+	dbName = './db/db-prod.json';
 
 } else {
-
-	prepareMail(config.testUser, config.sender, config.subject, config.options).then((res) => {
-
-		// Bottleneck to limit the sending
-		return limiter.schedule(send, res.transporter, res.mailOptions)
-				
-	}).then((res) => {
-		logger.verbose(res);
-
-	}).catch((err) => {
-		logger.error(err);
-	}); 
+	csvName = "./data/stage.csv";
+	dbName = './db/db-stage.json';
 }
 
+// Database stuff
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const adapter = new FileSync(dbName);
+const db = low(adapter);
+const shortid = require('shortid');
+
+// Set some defaults
+db.defaults({ sentEmails: [], failedEmails: [] })
+  .write();
+
+//Config File
+let config = require('./config/config.json');
+
+// Creates an object of bottleneck with the required settings - Infinite requests, one request ever 1.2 seconds, ??, ??, ??
+let limiter = new Bottleneck(0, 100, -1, Bottleneck.strategy.BLOCK, true);
+let outputArray = [];
+
+let today = moment().format("DD-MM-YYYY");
+
+
+readData(csvName).then((data) => {
+
+	let uniqueId = shortid.generate();
+
+	for (let userData of data) {
+
+		checkUserInDb(userData.user).then((res) => {
+
+			return prepareMail(userData, config.sender, config.subject, config.options);
+
+		}).then((res) => {
+
+			// Bottleneck to limit the sending
+			return limiter.schedule(send, res.transporter, res.mailOptions);
+
+		}).then((res) => {
+
+			logger.verbose(res);
+			outputArray.push(["Sent", res.successUser])
+
+			// Log to DB
+			db.get('sentEmails')
+			  .push({ id: uniqueId, user: res.successUser, date: today, messageID: res.info.messageId})
+			  .write()
+
+		}).catch((err) => {
+			
+			if(err.hasOwnProperty("query")) { // Handle failed querys
+				logger.verbose('User already exists in DB')
+
+			} else if (err.hasOwnProperty("failedUser")) { // Handle failed sending
+				logger.error(err);
+
+				outputArray.push(["Failed", err.failedUser, err.reason]);
+
+				db.get('failedEmails')
+				  .push({ id: uniqueId, user: err.failedUser, date: today, reason: err.reason})
+				  .write()
+
+			} else {
+				logger.error(err);
+			}
+		});
+	}
+}).catch((err) => {
+    logger.error(err);
+})
 
 function readData(file) {
 	return new Promise((resolve, reject) => {
 
-		let file = './data/test.csv';
 		let allData = [];
 		fs.createReadStream(file)
 		  .pipe(csv())
@@ -75,6 +102,22 @@ function readData(file) {
 		  .on('error', () => {
 		  	reject("got damn");
 		  })
+	})
+}
+
+function checkUserInDb(userId) {
+	return new Promise((resolve, reject) => {
+
+		const query = db.get('sentEmails')
+		  .find({ user: `${ userId }@cisco.com` })
+		  .value()
+
+		 if(query == undefined) {
+		 	resolve(query);
+		 } else {
+		 	reject({query: false})
+		 }
+
 	})
 }
 

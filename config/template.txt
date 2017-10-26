@@ -208,13 +208,13 @@ img {
                             <td style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:17px; color:#58585b;">
                         <p>Dear {username}</p></br>
 
-                <p>You have a Smartbadge that was shipped {elapsedDays} days ago but has not yet been activated. You will still incur the annual charge to your department whether the badge is activated or not, so please take the relevant action below.</p></br> 
+                <p>You have a Smartbadge request which has not yet been approved by your manager. Your request will be purged in 14 days if the required action below is not taken.</p></br> 
 
-                <p><strong>Activation</strong></p>
-                <p>Please follow the <a href="https://cisco.jiveon.com/docs/DOC-1413426" style="font-family:Arial, Helvetica, sans-serif; line-height:14px; color:#049fd9; text-decoration:none; ">activation instructions here</a> to activate your badge.</p></br>
+                <p><strong>I still require a Smartbadge</strong></p>
+                <p>Please get your manager to approve your request via the <a href="https://abraxas.cisco.com/stix/" style="font-family:Arial, Helvetica, sans-serif; line-height:14px; color:#049fd9; text-decoration:none; ">Stix approval site.</a>.</p></br>
 
-                <p><strong>I want to cancel my Smartbadge</strong></p>
-                <p>If you no longer need your Smartbadge please follow <a href="https://cisco.jiveon.com/docs/DOC-1413430" style="font-family:Arial, Helvetica, sans-serif; line-height:14px; color:#049fd9; text-decoration:none; ">instructions here</a> to terminate it. This will cease any charges to your department.</p></br>
+                <p><strong>I no longer require a Smartbadge</strong></p>
+                <p>You do not need to take any action. Your request will be purged from our system in 14 days.</p></br>
 
                 <p>To improve the Smartbadge service please can you reply to this email and provide the reason why you have not activated your Smartbadge.</p></br> 
                 
