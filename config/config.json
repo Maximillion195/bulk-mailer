@@ -1,0 +1,8 @@
+{
+	"sender": "Smartbadge <smartbadge-support@cisco.com",
+	"subject": "Smartbadge: Action Required",
+	"testUser": "maxport",
+	"options": {
+		"includeManager": 0
+	}
+}

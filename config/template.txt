@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>AnyConnect Update</title>
+<style type="text/css">
+img {
+    display: block;
+    margin: 0 auto;}
+
+      * {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      padding: 0px;
+      border: none;
+      line-height: normal;
+      outline: none;
+      list-style: square;
+      font-family: Arial, Helvetica, sans-serif;
+      -webkit-text-size-adjust: none;
+      }
+      body {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      width: 100% !important;
+      -webkit-text-size-adjust: 100% !important;
+      -ms-text-size-adjust: 100% !important;
+      -webkit-font-smoothing: antialiased !important;
+      }
+      img {
+      border: 0 !important;
+      outline: none !important;
+      }
+      table {
+      border-collapse: collapse;
+      mso-table-lspace: 0px;
+      mso-table-rspace: 0px;
+      }
+      ol{
+        padding-left: 2em;
+      }
+      td {
+      border-collapse: collapse;
+      mso-line-height-rule: exactly;
+      }
+      span {
+      border-collapse: collapse;
+      mso-line-height-rule: exactly;
+      }
+      .ExternalClass * {
+      line-height: 100%;
+      }
+      .number2 a {
+      text-decoration: none !important;
+      color: #58585b !important;
+      }
+      /*media query */
+      @media only screen and (max-width: 480px) {
+      table[class=wrapper] {
+      width: 100% !important;
+      }
+      table[class=hide] {
+      display: none !important;
+      }
+      td[class=hide] {
+      display: none !important;
+      }
+      table[class=main_table] {
+      width: 320px !important;
+      }
+      td[class=auto] {
+      height: auto !important;
+      }
+      td[class=text] {
+      text-align: center !important;
+      }
+      td[class=aside] {
+      width: 15px !important;
+      }
+      td[class=spc] {
+      height: 15px !important;
+      }
+      td[class=aside_two] {
+      width: 10px !important;
+      }
+      td[class=null] {
+      text-align: justify !important;
+      }
+      td[class=padding_bottom] {
+      padding-bottom: 5px !important;
+      }
+      td[class=padding_top] {
+      padding-top: 10px !important;
+      }
+      span[class=wrapper] {
+      width: 100% !important;
+      }
+      span[class=hide] {
+      display: none !important;
+      }
+      td[class=padding]{
+      padding-left:7px !important;
+      padding-right:7px !important;
+      }
+      }
+      @media only screen and (min-width: 480px) and (max-width: 599px) {
+      table[class=wrapper] {
+      width: 100% !important;
+      }
+      span[class=wrapper] {
+      width: 100% !important;
+      }
+      td[class=auto] {
+      height: auto !important;
+      }
+      table[class=hide] {
+      display: none !important;
+      }
+      td[class=hide] {
+      display: none !important;
+      }
+      table[class=main_table] {
+      width: 480px !important;
+      }
+      td[class=text] {
+      text-align: center !important;
+      }
+      td[class=aside] {
+      width: 15px !important;
+      }
+      td[class=spc] {
+      height: 10px !important;
+      }
+      td[class=null] {
+      text-align: justify !important;
+      }
+      td[class=padding_bottom] {
+      padding-bottom: 5px !important;
+      }
+      td[class=padding_top] {
+      padding-top: 10px !important;
+      }
+      td[class=padding]{
+      padding-left:7px !important;
+      padding-right:7px !important;
+      }
+      }
+    </style>
+</head>
+
+<body marginwidth="0" marginheight="0" bgcolor="#ffffff" style="font-family:Arial, Helvetica, sans-serif; color:#ffffff; margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-font-smoothing: antialiased;" offset="0" topmargin="0" leftmargin="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><table width="600" border="0" cellspacing="0" cellpadding="0" align="center" class="main_table">
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+                    <td>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td align="left" width="80"></td>
+                         <td class="hide">&nbsp;</td>
+                          <td align="right" width="100" valign="top">
+                            <table width="100" border="0" cellspacing="0" cellpadding="0" align="right">
+                              <tr>
+                                <td height="24">&nbsp;</td>
+                              </tr>
+                               <tr>
+                                <td align="right" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; line-height:27px; color:#a3a3a5;"><p style="color:#58585b; font-family:Arial, Helvetica, sans-serif; font-size:10px; padding-right:14px;"><br />
+<br />
+    </p></td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+        <tr>
+                          <td height="1" style="font-size:1px; line-height:1px;" bgcolor="#cbcbcb"></td>
+                        </tr>
+      <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="1" style="font-size:0px; line-height:0px;" bgcolor="#cbcbcb"><img src="http://msp.elateral.com/Studio/HTMLEmailImages/border-gray.gif" width="1" border="0" style="display:block;"></td>
+            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td><img src="http://www.cisco.com/c/dam/assets/responsive_templates/updated/blue-banner.png" width="100%" alt="" border="0" style="display:block;"/></td>
+              </tr>
+              <tr>
+                    <td height="30" class="spc" style="font-size:0px; line-height:0px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="30" class="aside">&nbsp;</td>
+                       <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                          <p style="color:#58585b; text-align: right; font-family:Arial, Helvetica, sans-serif;"></p>
+                            <td style="font-family:Arial, Helvetica, sans-serif; font-size:29px; line-height:30px; color:#58585b;"></td>
+                          </tr>
+                        <tr>
+                            <td height="16" style="font-size:0px; line-height:0px;">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:17px; color:#58585b;">
+                        <p>Dear {username}</p></br>
+
+                <p>You have a Smartbadge that was shipped {elapsedDays} days ago but has not yet been activated. You will still incur the annual charge to your department whether the badge is activated or not, so please take the relevant action below.</p></br> 
+
+                <p><strong>Activation</strong></p>
+                <p>Please follow the <a href="https://cisco.jiveon.com/docs/DOC-1413426" style="font-family:Arial, Helvetica, sans-serif; line-height:14px; color:#049fd9; text-decoration:none; ">activation instructions here</a> to activate your badge.</p></br>
+
+                <p><strong>I want to cancel my Smartbadge</strong></p>
+                <p>If you no longer need your Smartbadge please follow <a href="https://cisco.jiveon.com/docs/DOC-1413430" style="font-family:Arial, Helvetica, sans-serif; line-height:14px; color:#049fd9; text-decoration:none; ">instructions here</a> to terminate it. This will cease any charges to your department.</p></br>
+
+                <p>To improve the Smartbadge service please can you reply to this email and provide the reason why you have not activated your Smartbadge.</p></br> 
+                
+                <p>If you have any additional questions or feedback post to our <a href="https://cisco.jiveon.com/groups/smartbadge/pages/discussions" style="font-family:Arial, Helvetica, sans-serif; line-height:14px; color:#049fd9; text-decoration:none; ">Discussion forum</a>.</p></br> 
+
+
+                <p>Regards</p>
+                <p>Smartbadge Program Team<p>
+
+              </td>
+                          </tr>
+
+                          <tr>
+                            <td height="20" style="font-size:0px; line-height:0px;" class="spc">&nbsp;</td>
+                          </tr>
+                    </table></td>
+                    <td width="30" class="aside">&nbsp;</td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+            <td width="1" style="font-size:0px; line-height:0px;" bgcolor="#cbcbcb"><img src="http://msp.elateral.com/Studio/HTMLEmailImages/border-gray.gif" width="1" border="0" style="display:block;"></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+                          <td height="1" style="font-size:1px; line-height:1px;" bgcolor="#cbcbcb"></td>
+                        </tr>
+                  <tr>
+                    <td height="10" style="font-size:0px; line-height:0px;">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td><table width="575" border="0" cellspacing="0" cellpadding="0" align="center" class="wrapper">
+                        <tr>
+                          <td>
+                            <table width="250" border="0" cellspacing="0" cellpadding="0" align="left" class="wrapper">
+                              <tr>
+                                <td class="text" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; line-height:14px; color:#58585b;"><span class="number2" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; line-height:14px; color:#58585b;">2017 Cisco  and/or its affiliates.</span></td>
+                              </tr>
+                            </table>
+                            <table width="220" border="0" cellspacing="0" cellpadding="0" align="right" class="wrapper">
+                              <tr>
+                                <td>
+                                  <table width="220" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                   <td class="padding_top" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; line-height:14px; color:#049fd9; "><div align="right"><a href="http://www.cisco.com" target="_blank" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; line-height:14px; color:#049fd9; text-decoration:none;">Cisco.com</a> | <a href="http://www.cisco.com/en/US/swassets/sw293/privacy_statement.html" target="_blank" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; line-height:14px; color:#049fd9; text-decoration:none;">Privacy Statement</a> | <a href="http://www.cisco.com/en/US/swassets/sw293/trademark_statement.html" target="_blank" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; line-height:14px; color:#049fd9; text-decoration:none;">Trademarks</a></div></td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td height="17" style="font-size:0px; line-height:0px;" class="spc">&nbsp;</td>
+                  </tr>
+    </table></td>
+  </tr>
+</table>
+</td>
+  </tr>
+</table>
+
+</body>
+</html>
