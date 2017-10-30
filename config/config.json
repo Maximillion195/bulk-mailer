@@ -1,7 +1,7 @@
 {
-	"sender": "Smartbadge <smartbadge-support@cisco.com",
+	"sender": "Smartbadge Support <noreply@cisco.com",
 	"subject": "Smartbadge: Action Required",
 	"options": {
-		"includeManager": 0
+		"includeManager": 1
 	}
 }

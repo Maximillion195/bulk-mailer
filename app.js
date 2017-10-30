@@ -12,10 +12,11 @@ let csvName, dbName;
 if(process.env.GOLIVE == 1) {
 	csvName = "./data/prod.csv"
 	dbName = './db/db-prod.json';
-
+	logger.verbose("Production running");
 } else {
 	csvName = "./data/stage.csv";
 	dbName = './db/db-stage.json';
+	logger.verbose("Stage running");
 }
 
 // Database stuff
@@ -43,15 +44,26 @@ readData(csvName).then((data) => {
 
 	for (let userData of data) {
 
-		checkUserInDb(userData.user).then((res) => {
+		// Check for any blank cells in data
+		if(userData.user == "") {
+			break;
+		}
 
+		checkUserExists(userData.user).then((res) => {
+
+
+			// Add the extra data to userData
+			userData.prfName = res.prfn;
+			//userData.manager = res.mgrid;
+
+			return checkUserInDb(userData.user);
+
+		}).then((res) => {
 			return prepareMail(userData, config.sender, config.subject, config.options);
 
 		}).then((res) => {
-
 			// Bottleneck to limit the sending
 			return limiter.schedule(send, res.transporter, res.mailOptions);
-
 		}).then((res) => {
 
 			logger.verbose(res);
@@ -64,10 +76,10 @@ readData(csvName).then((data) => {
 		}).catch((err) => {
 			
 			if(err.hasOwnProperty("query")) { // Handle failed querys
-				logger.verbose('User already exists in DB')
+				logger.verbose(`User ${ err.user } already mailed recently`);
 
 			} else if (err.hasOwnProperty("failedUser")) { // Handle failed sending
-				logger.error(err);
+				logger.verbose(`User ${ err.failedUser } failed. ${ err.reason }`);
 
 				db.get('failedEmails')
 				  .push({ id: uniqueId, user: err.failedUser, date: today, reason: err.reason})
@@ -100,6 +112,22 @@ function readData(file) {
 	})
 }
 
+function checkUserExists(user) {
+	return new Promise((resolve, reject) => { 
+
+		axios.get(`http://directory.cisco.com/dir/details-json/${ user }`).then((res) => {
+
+			if (res.data.hasOwnProperty('uid')) {
+				resolve(res.data);
+			} else {
+				reject({ failedUser: user, reason: 'User does not exist' });
+			}
+		}).catch((err) => {
+			logger.error(err);
+		});
+	})
+}
+
 function checkUserInDb(userId) {
 	return new Promise((resolve, reject) => {
 
@@ -110,12 +138,11 @@ function checkUserInDb(userId) {
 		 if(query == undefined) {
 		 	resolve(query);
 		 } else {
-		 	reject({query: false})
+		 	reject({query: false, user: userId})
 		 }
 
 	})
 }
-
 
 function prepareMail(userData, sender, subject, options) {
 	return new Promise((resolve, reject) => {
@@ -130,19 +157,16 @@ function prepareMail(userData, sender, subject, options) {
 			secure: false
 		});
 
-		let p1 = fs.readFile('config/template.txt', 'utf8');
-		let p2 = axios.get(`http://directory.cisco.com/dir/details-json/${ user }`);
+		fs.readFile('config/template.txt', 'utf8').then((res) => {
 
-		Promise.all([p1, p2]).then((res) => {
-
-		    // Replace varibles in the template
-		    template = res[0].replace('{username}', res[1].data.prfn);
+		    // Replace variables in the template
+		    template = res.replace('{username}', userData.prfName);
 		    template = template.replace('{elapsedDays}', days);
 
 		    let mailOptions = {
 				from: sender, // Sender
 				to: `${ user }@cisco.com`,
-//				cc: options.includeManager ? res[1].data.mgrid : "",
+				cc: options.includeManager ? `${ userData.manager }@cisco.com` : "",
 				subject: subject,
 				html: template
 			};
@@ -171,7 +195,13 @@ function send(transporter, mailOptions) {
 				return;
 			}
 
-			resolve({ 'successUser': mailOptions.to, 'messageID': info.messageId, 'info': info.response  });
+			if (mailOptions.hasOwnProperty('cc')) {
+				resolve({ 'successUser': mailOptions.to, 'ccUser': mailOptions.cc , 'messageID': info.messageId, 'info': info.response  });
+
+			} else {
+				resolve({ 'successUser': mailOptions.to, 'messageID': info.messageId, 'info': info.response  });
+			}
+
 		});
 
 	})
